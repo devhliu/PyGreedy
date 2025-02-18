@@ -1,0 +1,192 @@
+PyGreedy Project Structure
+========================
+
+Created by: devhliu
+Created at: 2025-02-18 05:35:44 UTC
+
+Root Directory
+-------------
+pygreedy/
+├── LICENSE
+├── README.md
+├── setup.py
+├── requirements.txt
+├── docs/
+│   ├── conf.py                 # Sphinx configuration
+│   ├── make_docs.py           # Documentation builder script
+│   ├── index.rst              # Main documentation page
+│   ├── installation.rst       # Installation guide
+│   ├── quickstart.rst        # Quick start guide
+│   ├── usage.rst             # Usage guide
+│   ├── contributing.rst       # Contributing guidelines
+│   ├── changelog.rst         # Version history
+│   ├── _static/              # Static assets
+│   │   └── images/           # Documentation images
+│   ├── _templates/           # Custom Sphinx templates
+│   ├── api/                  # API documentation
+│   │   ├── core.rst         # Core API index
+│   │   ├── core/            # Core module docs
+│   │   │   ├── affine.rst
+│   │   │   ├── diffeomorphic.rst
+│   │   │   ├── metrics.rst
+│   │   │   └── parameters.rst
+│   │   ├── utils.rst        # Utils API index
+│   │   └── utils/           # Utils module docs
+│   │       ├── image_io.rst
+│   │       ├── logger.rst
+│   │       ├── transform.rst
+│   │       └── visualization.rst
+│   ├── user/                # User guide
+│   │   ├── registration.rst
+│   │   ├── metrics.rst
+│   │   ├── visualization.rst
+│   │   └── cli.rst
+│   └── examples/            # Example code and tutorials
+│       ├── affine.rst       # Affine registration example
+│       └── diffeomorphic.rst # Diffeomorphic registration example
+└── pygreedy/               # Main package
+    ├── __init__.py         # Package initialization
+    ├── cli/                # Command-line interface
+    │   ├── __init__.py
+    │   ├── main.py        # CLI entry point
+    │   ├── commands.py    # Command implementations
+    │   └── parser.py      # Argument parsing
+    ├── core/              # Core functionality
+    │   ├── __init__.py
+    │   ├── affine.py      # Affine registration
+    │   ├── diffeomorphic.py # Diffeomorphic registration
+    │   ├── metrics.py     # Similarity metrics
+    │   ├── parameters.py  # Registration parameters
+    │   └── utils/        # Utility functions
+    │       ├── __init__.py
+    │       ├── image_io.py # Image I/O operations
+    │       ├── logger.py  # Logging functionality
+    │       ├── transform.py # Transform operations
+    │       └── visualization.py # Result visualization
+    └── tests/            # Test suite
+        ├── __init__.py
+        ├── test_metrics.py # Metrics tests
+        ├── test_transform.py # Transform tests
+        ├── test_registration.py # Registration tests
+        └── test_cli.py   # CLI tests
+
+Module Descriptions
+-----------------
+
+1. Core Modules:
+   - affine.py: Affine registration implementation (rigid, similarity, affine)
+   - diffeomorphic.py: Diffeomorphic registration implementation
+   - metrics.py: Similarity metrics (NCC, MI, MSE)
+   - parameters.py: Registration parameter management
+
+2. Utilities:
+   - image_io.py: Image loading/saving (DICOM, NIfTI)
+   - logger.py: Logging configuration and setup
+   - transform.py: Transform operations and composition
+   - visualization.py: Result visualization tools
+
+3. CLI:
+   - main.py: Command-line interface entry point
+   - commands.py: Registration and visualization commands
+   - parser.py: Command-line argument parsing
+
+4. Tests:
+   - test_metrics.py: Similarity metric testing
+   - test_transform.py: Transform operation testing
+   - test_registration.py: Registration algorithm testing
+   - test_cli.py: Command-line interface testing
+
+5. Documentation:
+   - API Reference: Detailed documentation of all modules
+   - User Guide: How-to guides and tutorials
+   - Examples: Code examples and use cases
+
+Dependencies
+-----------
+Primary:
+- Python >= 3.8
+- PyTorch >= 1.7.0
+- NumPy >= 1.19.0
+- Nibabel >= 3.2.0
+- SimpleITK >= 2.0.0
+- matplotlib >= 3.3.0
+
+Development:
+- pytest >= 6.2.5
+- coverage >= 5.5
+- flake8 >= 3.9.0
+- mypy >= 0.910
+- black >= 21.6b0
+
+Documentation:
+- sphinx >= 4.0.0
+- sphinx-rtd-theme >= 0.5.2
+- sphinx-autodoc-typehints >= 1.12.0
+
+Key Features
+-----------
+1. Registration Methods:
+   - Affine registration (rigid, similarity, affine)
+   - Diffeomorphic registration
+   - Multi-resolution optimization
+   - GPU acceleration
+
+2. Similarity Metrics:
+   - Normalized Cross Correlation (NCC)
+   - Mutual Information (MI)
+   - Mean Squared Error (MSE)
+
+3. Utilities:
+   - DICOM/NIfTI support
+   - Transform composition
+   - Registration visualization
+   - Comprehensive logging
+
+4. Command-line Interface:
+   - Registration command
+   - Visualization tools
+   - Parameter configuration
+
+Installation
+-----------
+Basic:
+pip install pygreedy
+
+Development:
+pip install -e .[dev]
+
+Documentation:
+pip install -e .[docs]
+
+Usage Examples
+------------
+1. Command Line:
+   pygreedy register fixed.nii.gz moving.nii.gz -o output_dir
+   pygreedy visualize fixed.nii.gz warped.nii.gz -o result.png
+
+2. Python API:
+   from pygreedy import register_images
+   result = register_images(fixed, moving, parameters)
+
+Documentation
+------------
+Build:
+cd docs
+python make_docs.py
+
+Location:
+docs/build/html/index.html
+
+Testing
+-------
+Run Tests:
+python -m unittest discover pygreedy/tests
+
+Coverage:
+coverage run -m unittest discover pygreedy/tests
+coverage report
+
+Version Control
+-------------
+Git repository: https://github.com/devhliu/pygreedy
+Latest version: 0.1.0
